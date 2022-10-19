@@ -1,0 +1,18 @@
+
+//    EventNo = evt->GetEventID() + 1;
+//    theNameOfProcess = aStep->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
+//    theStepNumber = aStep->GetTrack()->GetCurrentStepNumber();
+//    xval = aStep->GetTrack()->GetPosition().x();
+    xval = aStep->GetPreStepPoint()->GetPosition().x();
+//    yval = aStep->GetTrack()->GetPosition().y();
+    yval = aStep->GetPreStepPoint()->GetPosition().y();
+//    zval = aStep->GetTrack()->GetPosition().z();
+    zval = aStep->GetPreStepPoint()->GetPosition().z();
+//  EKin = aStep->GetTrack()->GetKineticEnergy();
+    EKin = aStep->GetPreStepPoint()->GetKineticEnergy();
+//    xdir = aStep->GetTrack()->GetMomentumDirection().x();
+//    ydir = aStep->GetTrack()->GetMomentumDirection().y();
+//    zdir = aStep->GetTrack()->GetMomentumDirection().z();
+    xdir = aStep->GetPreStepPoint()->GetMomentumDirection().x();
+    ydir = aStep->GetPreStepPoint()->GetMomentumDirection().y();
+    zdir = aStep->GetPreStepPoint()->GetMomentumDirection().z();

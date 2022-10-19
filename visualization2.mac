@@ -1,0 +1,13 @@
+# Invoke the OGLIX driver
+/vis/open OGLIX
+#/vis/open DAWNFILE
+#/vis/open VRML1FILE
+
+# Set camera 
+/vis/viewer/reset 
+/vis/viewer/zoom 25
+/vis/viewer/set/viewpointThetaPhi 110 0
+#/vis/camera/spin 180 3
+# Create an empty scene and add the detector geometry to it
+/vis/drawVolume
+/vis/viewer/flush

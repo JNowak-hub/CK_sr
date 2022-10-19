@@ -1,0 +1,36 @@
+// $Id: AccPrimaryGeneratorAction.cc based on GEANT4, written by Adam Konefal, june 2003
+
+#include "AccPrimaryGeneratorAction.hh"
+#include "G4Event.hh"
+#include "G4ParticleGun.hh"
+#include "G4ParticleTable.hh"
+#include "G4ParticleDefinition.hh"
+#include "G4UImanager.hh"
+#include "globals.hh"
+#include "Randomize.hh"
+
+AccPrimaryGeneratorAction::AccPrimaryGeneratorAction()
+{
+  G4int n_particle = 1;
+  particleGun = new G4ParticleGun(n_particle);
+}
+
+AccPrimaryGeneratorAction::~AccPrimaryGeneratorAction()
+{
+  delete particleGun;
+}
+
+void AccPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
+{
+// -----------energia
+ G4double energy = (10 + CLHEP::RandGauss::shoot(.0,0.3))*MeV;
+ particleGun->SetParticleEnergy(energy);
+
+//-----------rozklad przestrzenny
+// G4double x = CLHEP::RandGauss::shoot(.0,0.);
+// G4double y = CLHEP::RandGauss::shoot(.0,0.);
+ particleGun->SetParticlePosition(G4ThreeVector(0*mm,0*mm,-100*mm));
+ particleGun->SetParticleMomentumDirection(G4ThreeVector(0*mm,0*mm,1000*mm));
+ particleGun->GeneratePrimaryVertex(anEvent);
+}
+

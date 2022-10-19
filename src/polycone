@@ -1,0 +1,21 @@
+
+  G4double phiStart = 0;
+  G4double phiTotal = 360*deg;
+  G4int numZPlanes = 2;
+  const G4double zPlane[] = { 3.45*cm,   9.5*cm};
+  const G4double rInner[] = { 0.846*cm, 2.33*cm};
+  const G4double rOuter[] = { 3.2*cm,   3.2*cm};
+
+  G4Polycone* solidpcoll = new G4Polycone("primary_collimator",phiStart,phiTotal,numZPlanes,
+                                                           zPlane,rInner,rOuter);
+							   
+   G4LogicalVolume* logicpcoll = new G4LogicalVolume(solidpcoll,W,"primary_collimator");				     
+   
+   G4double pcollPos_x = 0.0*cm;
+   G4double pcollPos_y = 0.0*cm;
+   G4double pcollPos_z = 0.0*cm;
+   G4VPhysicalVolume* physpcoll
+                  = new G4PVPlacement(0,
+                                G4ThreeVector(pcollPos_x,pcollPos_y,pcollPos_z),
+				logicpcoll,"primary_collimator",logicWorld,false,0);
+

@@ -1,0 +1,14 @@
+/control/verbose 2
+/control/saveHistory
+/run/verbose 2
+/vis/scene/create
+/vis/open OGLIX
+#/vis/open VRML1FILE
+/vis/viewer/zoom 15.
+/vis/viewer/flush
+/vis/viewer/set/viewpointThetaPhi 90 0
+/tracking/storeTrajectory 1
+/vis/scene/endOfEventAction accumulate
+/run/beamOn 1000
+
+
