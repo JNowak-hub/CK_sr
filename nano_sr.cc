@@ -17,7 +17,7 @@
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
 #endif   
- 
+ // komentarz
 
 int main()
 {
