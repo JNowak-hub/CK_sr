@@ -341,17 +341,43 @@ full10Boron->AddIsotope(B10, abundance=100.*perCent);
  phantomWaterVolume->SetVisAttributes(phantomWaterVisAtt);
 
  // ------------------------------------------------------Outer sensitive detector
- G4double outerSDX = 210./2*um;
- G4double outerSDY = 210./2*um;
- G4double outerSDZ = 420./2*um;
+ G4double outerSDX = 210./2*mm;
+ G4double outerSDY = 210./2*mm;
+ G4double outerSDZ = 420./2*mm;
 
  G4Box* outerSD = new G4Box("OuterSD", outerSDX, outerSDY, outerSDZ);
  G4LogicalVolume* outerSDVolumne = new G4LogicalVolume(outerSD, H2O, "OuterSD");
  G4VPhysicalVolume* outerSDPshyVolume = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.) ,outerSDVolumne, "OuterSD", phantomWaterVolume, false, 0);
 
  G4VisAttributes* outerSDVisAtt = new G4VisAttributes(G4Colour(0,1,0));
- outerSDVisAtt->SetForceSolid(true);
+ outerSDVisAtt->SetForceSolid(false);
  outerSDVolumne->SetVisAttributes(outerSDVisAtt);
+
+ // ------------------------------------------------------Middle sensitive detector
+ G4double middleSDX = 140./2*mm;
+ G4double middleSDY = 140./2*mm;
+ G4double middleSDZ = 280./2*mm;
+
+ G4Box* middleSD = new G4Box("MiddleSD", middleSDX, middleSDY, middleSDZ);
+ G4LogicalVolume* middleSDVolumne = new G4LogicalVolume(middleSD, H2O, "MiddleSD");
+ G4VPhysicalVolume* middleSDPshyVolume = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.) ,middleSDVolumne, "MiddleSD", outerSDVolumne, false, 0);
+
+ G4VisAttributes* middleSDVisAtt = new G4VisAttributes(G4Colour(1,1,0));
+ middleSDVisAtt->SetForceSolid(false);
+ middleSDVolumne->SetVisAttributes(middleSDVisAtt);
+
+ // ------------------------------------------------------Inner sensitive detector
+ G4double innerSDX = 70./2*mm;
+ G4double innerSDY = 70./2*mm;
+ G4double innerSDZ = 140./2*mm;
+
+ G4Box* innerSD = new G4Box("InnerSD", innerSDX, innerSDY, innerSDZ);
+ G4LogicalVolume* innerSDVolumne = new G4LogicalVolume(innerSD, H2O, "InnerSD");
+ G4VPhysicalVolume* innerSDPshyVolume = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.) ,innerSDVolumne, "InnerSD", middleSDVolumne, false, 0);
+
+ G4VisAttributes* innerSDVisAtt = new G4VisAttributes(G4Colour(1,0.5,0));
+ innerSDVisAtt->SetForceSolid(false);
+ innerSDVolumne->SetVisAttributes(innerSDVisAtt);
 
  return physWorld;
  }
