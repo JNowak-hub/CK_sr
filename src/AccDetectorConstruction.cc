@@ -138,8 +138,7 @@ G4VPhysicalVolume* AccDetectorConstruction::Construct()
 
  // ------------ define materials from elements
  
-  density = 1.290*mg/cm3;
-  G4Material* Air = new G4Material(name="air", density, ncomponents=2);
+  G4Material* Air = new G4Material(name="air", 1.290*mg/cm3, ncomponents=2);
   Air->AddElement(elN, fractionmass=0.7);
   Air->AddElement(elO, fractionmass=0.3);
 
@@ -147,18 +146,12 @@ G4VPhysicalVolume* AccDetectorConstruction::Construct()
   plexiGlass->AddElement(elH, fractionmass=0.080538);
   plexiGlass->AddElement(elC, fractionmass=0.599848);
   plexiGlass->AddElement(elO, fractionmass=0.319614);
-/*
-//
-  density = 0.9*g/cm3;
-//  G4Material* paraffin = new G4Material(name="paraffin", density, ncomponents=2);
-//  paraffin->AddElement(elC, natoms= 20);
-//  paraffin->AddElement(elH, natoms= 42); 
 
-  density = 1.0*g/cm3;
-  G4Material* H2O = new G4Material(name="water", density, ncomponents=2);
+  G4Material* H2O = new G4Material(name="water", 1.0*g/cm3, ncomponents=2);
   H2O->AddElement(elH, natoms= 2);
   H2O->AddElement(elO, natoms= 1); 
 
+/*
 // definition of stainless steel
 
   density = 8.02*g/cm3;
@@ -277,6 +270,17 @@ natCu->AddIsotope(Cu5, abundance= 30.83*perCent);
  G4Material* In = new G4Material(name="Ind", z=49., a, density);
 */
 
+// definition of boron 
+G4Isotope* B10 = new G4Isotope(name="B10", iz=5, n=10, a=10.013*g/mole);
+G4Isotope* B11 = new G4Isotope(name="B11", iz=5, n=11, a=10.811*g/mole);
+
+G4Element* naturalBoron = new G4Element(name="boron",symbol="B", ncomponents=2);
+naturalBoron->AddIsotope(B10, abundance=19.9*perCent);
+naturalBoron->AddIsotope(B11, abundance=80.1*perCent);
+
+G4Element* full10Boron = new G4Element(name="boron10", symbol="B10", ncomponents=1);
+full10Boron->AddIsotope(B10, abundance=100.*perCent);
+
   // definition of vacuum
 
   density = 1.2-20*g/cm3; //universe_mean_density; // from PhysicalConstants.h
@@ -299,7 +303,7 @@ natCu->AddIsotope(Cu5, abundance= 30.83*perCent);
                                 World_y,
                                 World_z); // size of the volume
   G4LogicalVolume* logicWorld = new G4LogicalVolume(solidWorld, // name of the solid
-                                                    Air, // material of the volume
+                                                    vacuum, // material of the volume
 				                                            "World"); // name of the volume
 						    
   G4VPhysicalVolume* physWorld = new G4PVPlacement(0, // no rotation
@@ -320,21 +324,35 @@ natCu->AddIsotope(Cu5, abundance= 30.83*perCent);
  G4LogicalVolume* phantomVolume = new G4LogicalVolume(phantom, plexiGlass, "Phantom");
  G4VPhysicalVolume* phantomPhysVolume = new G4PVPlacement(0, G4ThreeVector(),phantomVolume, "Phantom",logicWorld,false,0);
 
- G4VisAttributes* phantomVisAtt = new G4VisAttributes(G4Colour(0,0,1));
+ G4VisAttributes* phantomVisAtt = new G4VisAttributes(G4Colour(2,0,1));
  phantomVisAtt->SetForceSolid(false);
  phantomVolume->SetVisAttributes(phantomVisAtt);
 
- G4double phantomWaterX = 66./2*cm;
- G4double phantomWaterY = 63./2*cm;
- G4double phantomWaterZ = 41./2*cm;
+ G4double phantomWaterX = 64.5/2*cm;
+ G4double phantomWaterY = 61.5/2*cm;
+ G4double phantomWaterZ = 62./2*cm;
 
- G4Box* phantomWater = new G4Box("Phantom", phantomX, phantomY, phantomY);
- G4LogicalVolume* phantomWaterVolume = new G4LogicalVolume(phantom, plexiGlass, "Phantom");
- G4VPhysicalVolume* phantomWaterPhysVolume = new G4PVPlacement(0, G4ThreeVector(0., 0., -7.5*cm) ,phantomWaterVolume, "Phantom", phantomVolume, false, 0);
+ G4Box* phantomWater = new G4Box("PhantomWater", phantomWaterX, phantomWaterY, phantomWaterZ);
+ G4LogicalVolume* phantomWaterVolume = new G4LogicalVolume(phantomWater, H2O, "PhantomWater");
+ G4VPhysicalVolume* phantomWaterPhysVolume = new G4PVPlacement(0, G4ThreeVector(0., 0., 3.5/2*cm) ,phantomWaterVolume, "PhantomWater", phantomVolume, false, 0);
 
- G4VisAttributes* phantomWaterVisAtt = new G4VisAttributes(G4Colour(0,0,2));
- phantomWaterVisAtt->SetForceSolid(true);
- phantomWaterVolume->SetVisAttributes(phantomVisAtt);
+ G4VisAttributes* phantomWaterVisAtt = new G4VisAttributes(G4Colour(0,0,1));
+ phantomWaterVisAtt->SetForceSolid(false);
+ phantomWaterVolume->SetVisAttributes(phantomWaterVisAtt);
+
+ // ------------------------------------------------------Outer sensitive detector
+ G4double outerSDX = 210./2*um;
+ G4double outerSDY = 210./2*um;
+ G4double outerSDZ = 420./2*um;
+
+ G4Box* outerSD = new G4Box("OuterSD", outerSDX, outerSDY, outerSDZ);
+ G4LogicalVolume* outerSDVolumne = new G4LogicalVolume(outerSD, H2O, "OuterSD");
+ G4VPhysicalVolume* outerSDPshyVolume = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.) ,outerSDVolumne, "OuterSD", phantomWaterVolume, false, 0);
+
+ G4VisAttributes* outerSDVisAtt = new G4VisAttributes(G4Colour(0,1,0));
+ outerSDVisAtt->SetForceSolid(true);
+ outerSDVolumne->SetVisAttributes(outerSDVisAtt);
+
  return physWorld;
  }
 
