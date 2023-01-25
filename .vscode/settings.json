@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "randomize.h": "c"
+        "randomize.h": "c",
+        "*.icc": "cpp"
     }
 }
