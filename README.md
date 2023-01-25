@@ -2,4 +2,6 @@
 
 need to create folder build and make cm file containing:
 
-cmake -DGeant4_DIR=/media/ak/HD2TB/GEANT4/geant4.10.07.p02-install/share/Geant4-10.7.2 /media/ak/HD2TB/GEANT4/geant4.10.07.p02/examples/main/nano_br/CK_sr
+Add paht to your geant installation share folder and to source code example:
+
+cmake -DGeant4_DIR=/home/gate/Geant4/v11_0_2/geant4-v11.0.2-install/share/Geant4-11.0.2 /home/gate/Documents/CK_sr
