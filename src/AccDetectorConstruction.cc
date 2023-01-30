@@ -281,9 +281,12 @@ naturalBoron->AddIsotope(B11, abundance=80.1*perCent);
 G4Element* full10Boron = new G4Element(name="boron10", symbol="B10", ncomponents=1);
 full10Boron->AddIsotope(B10, abundance=100.*perCent);
 
+G4Material* boron10 = new G4Material(name="Boron", 2340.*kg/m3, 1);
+boron10->AddElement(full10Boron, fractionmass=1);
+
   // definition of vacuum
 
-  density = 1.2-20*g/cm3; //universe_mean_density; // from PhysicalConstants.h
+  density = 1.2-20*g/cm3;
   pressure = 3.e-18*pascal;
   temperature = 2.73*kelvin;
   G4Material* vacuum = new G4Material(name = "Galactic", z=1., a=1.01*g/mole,
@@ -298,22 +301,9 @@ full10Boron->AddIsotope(B10, abundance=100.*perCent);
   G4double World_y = 1.2*m;
   G4double World_z = 1.2*m;
   
-  G4Box* solidWorld = new G4Box("World", // name of the volume
-                                World_x,
-                                World_y,
-                                World_z); // size of the volume
-  G4LogicalVolume* logicWorld = new G4LogicalVolume(solidWorld, // name of the solid
-                                                    vacuum, // material of the volume
-				                                            "World"); // name of the volume
-						    
-  G4VPhysicalVolume* physWorld = new G4PVPlacement(0, // no rotation
-                                                  G4ThreeVector(), // position at (0,0,0)
-                                                 "World",  // name of the volume
-                                                  logicWorld, // name of the logical volume
-					                                        0, // its mother volume
-					                                        false, // no boolean operation
-					                                        0); // copy number
-
+  G4Box* solidWorld = new G4Box("World", World_x,World_y,World_z);
+  G4LogicalVolume* logicWorld = new G4LogicalVolume(solidWorld, vacuum, "World");						    
+  G4VPhysicalVolume* physWorld = new G4PVPlacement(0, G4ThreeVector(), "World", logicWorld, 0, false, 0);
  
  // ------------------------------------------------------phantom
  G4double phantomX = 67.5/2*cm;
@@ -379,6 +369,45 @@ full10Boron->AddIsotope(B10, abundance=100.*perCent);
  innerSDVisAtt->SetForceSolid(false);
  innerSDVolumne->SetVisAttributes(innerSDVisAtt);
 
+ // ------------------------------------------------------Nano particles
+ /*
+ G4double rMin = 0.*um;
+//  G4double rMax = 6.035/2*mm;
+ G4double rMax = 62.035/2*nm;
+ G4Sphere* nanoParticle = new G4Sphere("NanoParticle", rMin, rMax, 0.*deg, 360.*deg, 0.*deg, 360.*deg);
+ G4LogicalVolume* nanoParticleVolume = new G4LogicalVolume(nanoParticle, boron10, "NanoParticle");
+
+ G4double possX = 70./2*mm;
+ G4double possY = 70./2*mm;
+ G4double possZ = 140./2*mm;
+
+ G4VisAttributes* nanoParticleVisAtt = new G4VisAttributes(G4Colour(0,1,1));
+ nanoParticleVisAtt->SetForceSolid(true);
+ nanoParticleVolume->SetVisAttributes(nanoParticleVisAtt);
+for (size_t x = 0; x < 10; x++)
+{
+  for (size_t y = 0; y < 2; y++)
+  {
+    for (size_t z = 0; z < 2; z++)
+    {
+      possZ = possZ - 700./2*um;
+      // possZ = possZ - 7./2*mm;
+      // new G4PVPlacement(0, G4ThreeVector(possX, possY, possZ) ,nanoParticleVolume, "NanoParticle", innerSDVolumne, false, 0);
+      new G4PVPlacement(0, G4ThreeVector(possX, possY, possZ) ,nanoParticleVolume, "NanoParticle", phantomWaterVolume, false, 0);
+    }
+        possY = possY - 700./2*um;
+        // possY = possY - 7./2*mm;
+        possZ = 140./2*mm;
+    // new G4PVPlacement(0, G4ThreeVector(possX, possY, possZ) ,nanoParticleVolume, "NanoParticle", innerSDVolumne, false, 0);
+    new G4PVPlacement(0, G4ThreeVector(possX, possY, possZ) ,nanoParticleVolume, "NanoParticle", phantomWaterVolume, false, 0);
+  }
+    possX = possX + 700./2*um;
+    // possX = possX - 7./2*mm;
+    possY = 70./2*mm;
+  // new G4PVPlacement(0, G4ThreeVector(possX, possY, possZ) ,nanoParticleVolume, "NanoParticle", innerSDVolumne, false, 0);
+  new G4PVPlacement(0, G4ThreeVector(possX, possY, possZ) ,nanoParticleVolume, "NanoParticle", phantomWaterVolume, false, 0);
+}
+*/
  return physWorld;
  }
 
