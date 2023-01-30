@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "randomize.h": "c",
+        "*.icc": "cpp"
+    }
+}
