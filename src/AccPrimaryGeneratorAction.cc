@@ -31,7 +31,7 @@ AccPrimaryGeneratorAction::~AccPrimaryGeneratorAction()
 
 void AccPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-
+  
 }
 
 
