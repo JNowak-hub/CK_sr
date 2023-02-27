@@ -15,13 +15,13 @@
 #include <fstream>
 #include <iostream>
 #include "G4SystemOfUnits.hh"
+#include "G4GeneralParticleSource.hh"
 
 using namespace std;
 
 AccPrimaryGeneratorAction::AccPrimaryGeneratorAction()
 {
-  G4int n_particle = 1;
-  particleGun = new G4ParticleGun(n_particle);
+  particleGun = new G4GeneralParticleSource();
 }
 
 AccPrimaryGeneratorAction::~AccPrimaryGeneratorAction()
@@ -31,7 +31,7 @@ AccPrimaryGeneratorAction::~AccPrimaryGeneratorAction()
 
 void AccPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  
+  particleGun -> GeneratePrimaryVertex(anEvent);
 }
 
 

@@ -14,6 +14,7 @@ target_link_libraries(nano ${Geant4_LIBRARIES})
 
 set(nano_sr_SCRIPTS
   simulation.mac
+  protons.mac
   vis.mac
   )
 

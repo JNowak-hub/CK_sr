@@ -1,7 +1,8 @@
-/gun/particle neutron
-/gun/energy 10 MeV
-/gun/position 0 0 -100 mm
-/tracking/verbose 0
-/gun/direction 0 0 1000 mm 
+#/gun/particle neutron
+#/gun/energy 10 MeV
+#/gun/position 0 0 -100 mm
+/run/initialize
+/control/execute protons.mac
+/tracking/verbose 1
 /run/beamOn 1000
 exit

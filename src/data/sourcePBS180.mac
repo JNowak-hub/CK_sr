@@ -1,0 +1,81 @@
+#=====================================================
+# BEAMS
+#=====================================================
+
+/gate/source/addSource prot     gps
+/gate/source/addSource gamm     gps
+/gate/source/addSource ele      gps
+
+#=====================================================
+# Position and shape
+#=====================================================
+
+#----------------------------protons--------------------------------
+
+/gate/source/prot/gps/position      0. 0. 14. cm
+/gate/source/prot/gps/pos/type      Plane
+/gate/source/prot/gps/shape	    Circle
+/gate/source/prot/gps/radius	    0.1 um
+/gate/source/prot/gps/ang/type      iso
+/gate/source/prot/gps/ang/mintheta  0. deg
+/gate/source/prot/gps/ang/maxtheta  0. deg
+/gate/source/prot/gps/ang/minphi    0. deg
+/gate/source/prot/gps/ang/maxphi    360. deg
+/gate/source/prot/gps/pos/rot1      1 0 0
+/gate/source/prot/gps/ang/rot1      1 0 0
+
+#----------------------------gammas--------------------------------
+
+/gate/source/gamm/gps/position      0. 0. 14. cm
+/gate/source/gamm/gps/pos/type      Plane
+/gate/source/gamm/gps/shape	    Circle
+/gate/source/gamm/gps/radius	    0.1 um
+/gate/source/gamm/gps/ang/type      iso
+/gate/source/gamm/gps/ang/mintheta  0. deg
+/gate/source/gamm/gps/ang/maxtheta  0. deg
+/gate/source/gamm/gps/ang/minphi    0. deg
+/gate/source/gamm/gps/ang/maxphi    360. deg
+/gate/source/gamm/gps/pos/rot1      1 0 0
+/gate/source/gamm/gps/ang/rot1      1 0 0
+
+#----------------------------electrons--------------------------------
+
+/gate/source/ele/gps/position      0. 0. 14. cm
+/gate/source/ele/gps/pos/type      Plane
+/gate/source/ele/gps/shape	   Circle
+/gate/source/ele/gps/radius	   0.1 um
+/gate/source/ele/gps/ang/type      iso
+/gate/source/ele/gps/ang/mintheta  0. deg
+/gate/source/ele/gps/ang/maxtheta  0. deg
+/gate/source/ele/gps/ang/minphi    0. deg
+/gate/source/ele/gps/ang/maxphi    360. deg
+/gate/source/ele/gps/pos/rot1      1 0 0
+/gate/source/ele/gps/ang/rot1      1 0 0
+
+#=====================================================
+# Type of particle & Energy spectrum
+#=====================================================
+
+#-----------------------------protons-------------------------------
+
+/gate/source/prot/gps/particle proton
+/gate/source/prot/gps/energytype   UserSpectrum
+/gate/source/prot/gps/hist/type   energy
+/gate/source/prot/gps/setSpectrumFile ../data/180MeV/protons.txt
+/gate/source/prot/setIntensity 0.9903
+
+#-----------------------------gammas-------------------------------
+
+/gate/source/gamm/gps/particle gamma
+/gate/source/gamm/gps/energytype   UserSpectrum
+/gate/source/gamm/gps/hist/type   energy
+/gate/source/gamm/gps/setSpectrumFile ../data/180MeV/gammas.txt
+/gate/source/gamm/setIntensity 0.0096
+
+#-----------------------------electrons-------------------------------
+
+/gate/source/ele/gps/particle e-
+/gate/source/ele/gps/energytype   UserSpectrum
+/gate/source/ele/gps/hist/type   energy
+/gate/source/ele/gps/setSpectrumFile ../data/180MeV/electrons.txt
+/gate/source/ele/setIntensity 0.0001
