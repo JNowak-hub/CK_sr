@@ -7,7 +7,8 @@
 #include "AccEventAction.hh"
 //#include "AccVisManager.hh"
 #include "AccDetectorConstruction.hh"
-#include "ML2PhysicsList.hh"
+#include "PhysicsList.hh"
+#include "QGSP_BIC_HP.hh"
 #include "AccPrimaryGeneratorAction.hh"
 #include "AccSteppingAction.hh"
 #include "AccTrackingAction.hh"
@@ -32,7 +33,8 @@ G4RunManager* runManager = new G4RunManager;
 
 // seting mandatory initialization classes
 runManager->SetUserInitialization(new AccDetectorConstruction);
-runManager->SetUserInitialization(new ML2PhysicsList);
+runManager->SetUserInitialization(new PhysicsList);
+runManager->SetUserInitialization(new QGSP_BIC_HP);
 
 // seting user's action classes
 runManager->SetUserAction(new AccPrimaryGeneratorAction);
