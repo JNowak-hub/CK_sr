@@ -21,7 +21,7 @@
 /////////////////////////////////////////////////////////////////////////////
 ML2PhysicsList::ML2PhysicsList() : G4VModularPhysicsList()
 {
-  defaultCutValue = 1.*mm;
+  defaultCutValue = 1.*m;
   helIsRegisted  = false;
   bicIsRegisted  = false;
   biciIsRegisted = false;

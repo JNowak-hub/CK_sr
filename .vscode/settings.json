@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "randomize.h": "c",
-        "*.icc": "cpp"
+        "*.icc": "cpp",
+        "iosfwd": "cpp"
     }
 }

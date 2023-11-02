@@ -23,27 +23,42 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// Authors: Susanna Guatelli and Francesco Romano
-// susanna@uow.edu.au, francesco.romano@ct.infn.it
+// This example is provided by the Geant4-DNA collaboration
+// Any report or published results obtained using the Geant4-DNA software 
+// shall cite the following Geant4-DNA collaboration publication:
+// Med. Phys. 37 (2010) 4692-4708
+// The Geant4-DNA web site is available at http://geant4-dna.org
+//
+/// \file PhysicsList.hh
+/// \brief Definition of the PhysicsList class
 
+#ifndef PhysicsList_h
+#define PhysicsList_h 1
 
-#ifndef PrimaryGeneratorAction_hh
-#define PrimaryGeneratorAction_hh 1
+#include "G4VUserPhysicsList.hh"
+#include "G4ProcessManager.hh"
+#include "G4ParticleTypes.hh"
 
-#include "G4VUserPrimaryGeneratorAction.hh"
-#include "globals.hh"
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-class G4GeneralParticleSource;
-class G4Event;
-class AccPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
+class PhysicsList: public G4VUserPhysicsList
 {
 public:
-AccPrimaryGeneratorAction();
-~AccPrimaryGeneratorAction();
 
-void GeneratePrimaries(G4Event* anEvent);
+  PhysicsList();
+  ~PhysicsList() override;
 
-private:  
-G4GeneralParticleSource* gun;
+  void ConstructParticle() override;
+  void ConstructProcess() override;
+
+protected:
+
+  void ConstructBosons();
+  void ConstructLeptons();
+  void ConstructBarions();
+
+  void ConstructGeneral();
+  void ConstructEM();
+    
 };
 #endif
