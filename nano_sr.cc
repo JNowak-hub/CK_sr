@@ -8,6 +8,7 @@
 //#include "AccVisManager.hh"
 #include "AccDetectorConstruction.hh"
 #include "PhysicsList.hh"
+#include "ML2PhysicsList.hh"
 #include "AccPrimaryGeneratorAction.hh"
 #include "AccSteppingAction.hh"
 #include "AccTrackingAction.hh"
@@ -32,7 +33,7 @@ G4RunManager* runManager = new G4RunManager;
 
 // seting mandatory initialization classes
 runManager->SetUserInitialization(new AccDetectorConstruction);
-runManager->SetUserInitialization(new PhysicsList);
+runManager->SetUserInitialization(new ML2PhysicsList);
 
 // seting user's action classes
 runManager->SetUserAction(new AccPrimaryGeneratorAction);

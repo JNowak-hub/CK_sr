@@ -39,7 +39,7 @@ void AccSteppingAction::UserSteppingAction(const G4Step *aStep)
       G4String thePostPVName = thePostPV->GetName();
       //----------------
       
-        if (thePostPVName == "InnerSD")
+        if (thePostPVName == "InnerSD" && thePrePVName =="InnerSD" && thePostPVName != "NanoParticle" && thePrePVName != "NanoParticle")
         {
           EKin = aStep->GetTrack()->GetKineticEnergy();
           xval = aStep->GetTrack()->GetPosition().x();
@@ -73,7 +73,7 @@ void AccSteppingAction::UserSteppingAction(const G4Step *aStep)
       G4String thePostPVName = thePostPV->GetName();
       //----------------
 
-      if (thePostPVName == "InnerSD")
+      if (thePostPVName == "InnerSD" && thePrePVName =="InnerSD" && thePostPVName != "NanoParticle" && thePrePVName != "NanoParticle")
       {
         EKin = aStep->GetTrack()->GetKineticEnergy();
         xval = aStep->GetTrack()->GetPosition().x();
@@ -101,7 +101,7 @@ void AccSteppingAction::UserSteppingAction(const G4Step *aStep)
       G4String thePostPVName = thePostPV->GetName();
       //----------------
 
-      if (thePostPVName == "InnerSD")
+      if (thePostPVName == "InnerSD" && thePrePVName =="InnerSD" && thePostPVName != "NanoParticle" && thePrePVName != "NanoParticle")
       {
         EKin = aStep->GetTrack()->GetKineticEnergy();
         xval = aStep->GetTrack()->GetPosition().x();
@@ -129,7 +129,7 @@ void AccSteppingAction::UserSteppingAction(const G4Step *aStep)
       G4String thePostPVName = thePostPV->GetName();
       //----------------
 
-      if (thePostPVName == "InnerSD")
+      if (thePostPVName == "InnerSD" && thePrePVName =="InnerSD" && thePostPVName != "NanoParticle" && thePrePVName != "NanoParticle")
       {
         EKin = aStep->GetTrack()->GetKineticEnergy();
         xval = aStep->GetTrack()->GetPosition().x();

@@ -81,6 +81,7 @@
 #include "G4MollerBhabhaModel.hh"
 #include "G4IonFluctuations.hh"
 #include "G4UniversalFluctuation.hh"
+#include "G4MesonConstructor.hh"
 
 #include "G4ElectronCapture.hh"
 #include "G4HadronPhysicsQGSP_BIC.hh"
@@ -132,6 +133,9 @@ PhysicsList::~PhysicsList()
 
 void PhysicsList::ConstructParticle()
 {
+  // Construct all mesons
+  G4MesonConstructor mConstructor;
+  mConstructor.ConstructParticle();
   ConstructBosons();
   ConstructLeptons();
   ConstructBarions();
@@ -157,6 +161,7 @@ void PhysicsList::ConstructBarions()
 {
   //  baryons
   G4Proton::ProtonDefinition();
+  G4Neutron::NeutronDefinition();
   G4GenericIon::GenericIonDefinition();
 
   // Geant4 DNA new particles

@@ -279,11 +279,11 @@ G4VPhysicalVolume *AccDetectorConstruction::Construct()
   naturalBoron->AddIsotope(B10, abundance = 19.9 * perCent);
   naturalBoron->AddIsotope(B11, abundance = 80.1 * perCent);
 
-  G4Element *full10Boron = new G4Element(name = "boron10", symbol = "B10", ncomponents = 1);
-  full10Boron->AddIsotope(B10, abundance = 100. * perCent);
+  G4Element *full11Boron = new G4Element(name = "boron10", symbol = "B11", ncomponents = 1);
+  full11Boron->AddIsotope(B11, abundance = 100. * perCent);
 
-  G4Material *boron10 = new G4Material(name = "Boron", 2340. * kg / m3, 1);
-  boron10->AddElement(full10Boron, fractionmass = 1);
+  G4Material *boron11 = new G4Material(name = "Boron", 2340. * kg / m3, 1);
+  boron11->AddElement(full11Boron, fractionmass = 1);
 
   // definition of vacuum
 
@@ -375,11 +375,11 @@ G4VPhysicalVolume *AccDetectorConstruction::Construct()
   //  G4double rMax = 6.035/2*mm;
   G4double rMax = 62.035 / 2 * nm;
   G4Sphere *nanoParticle = new G4Sphere("NanoParticle", rMin, rMax, 0. * deg, 360. * deg, 0. * deg, 360. * deg);
-  G4LogicalVolume *nanoParticleVolume = new G4LogicalVolume(nanoParticle, boron10, "NanoParticle");
+  G4LogicalVolume *nanoParticleVolume = new G4LogicalVolume(nanoParticle, boron11, "NanoParticle");
 
-  G4double possX = 70. / 2 * mm;
-  G4double possY = 70. / 2 * mm;
-  G4double possZ = 140. / 2 * mm;
+  G4double possX = 70. / 2 * um;
+  G4double possY = 70. / 2 * um;
+  G4double possZ = 140. / 2 * um;
 
   G4VisAttributes *nanoParticleVisAtt = new G4VisAttributes(G4Colour(0, 1, 1));
   nanoParticleVisAtt->SetForceSolid(true);
